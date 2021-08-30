@@ -15,7 +15,7 @@ const { requestLogger, errorLogger } = require("./middlewares/logger");
 
 const app = express();
 
-mongoose.connect("mongodb://localhost:27017/bitfilmdb", {
+mongoose.connect("mongodb://localhost:27017/bestmoviesdb", {
   useNewUrlParser: true,
   useCreateIndex: true,
   useFindAndModify: false,
