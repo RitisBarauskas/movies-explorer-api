@@ -6,12 +6,6 @@ const {
   deleteMovie,
 } = require("../controllers/movies");
 
-// const {
-//   validationUserID,
-//   validationUpdateAvatar,
-//   validationUpdateUser,
-// } = require("../utils/validations");
-
 movies.get("/movies", getMovies);
 
 movies.post("/movies", createMovie);
