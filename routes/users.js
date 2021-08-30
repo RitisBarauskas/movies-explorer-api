@@ -13,6 +13,6 @@ const {
 
 users.get("/me", getProfile);
 
-users.patch("/me", validationUpdateUser, updateUser);
+users.patch("/me", updateUser);
 
 module.exports = users;

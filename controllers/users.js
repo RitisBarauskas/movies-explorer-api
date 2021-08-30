@@ -5,9 +5,6 @@ const User = require("../models/user");
 const {
   BadRequestError,
   NotFoundError,
-  UnauthorizedError,
-  ForbiddenError,
-  ConflictError
 } = require("../errors");
 
 
@@ -17,7 +14,10 @@ module.exports.getProfile = (req, res, next) => {
     .orFail(() => {
       throw new NotFoundError("Пользователь не найден");
     })
-    .then((user) => res.send(user))
+    .then((user) => res.send({
+      email: user.email,
+      name: user.name,
+    }))
     .catch((err) => {
       if (err.name === "ValidationError" || err.name === "CastError") {
         throw new BadRequestError("Переданы некорректные данные");
@@ -29,17 +29,20 @@ module.exports.getProfile = (req, res, next) => {
 
 
 module.exports.updateUser = (req, res, next) => {
-  const { name, about } = req.body;
+  const { email, name } = req.body;
   const owner = req.user._id;
   User.findByIdAndUpdate(
     owner,
-    { name, about },
+    { email, name },
     { new: true, runValidators: true }
   )
     .orFail(() => {
       throw new NotFoundError("Пользователь с таким ID не найден");
     })
-    .then((user) => res.send(user))
+    .then((user) => res.send({
+      email: user.email,
+      name: user.name,
+    }))
     .catch((err) => {
       if (err.name === "ValidationError" || err.name === "CastError") {
         throw new BadRequestError("Переданы некорректные данные");
