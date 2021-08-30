@@ -9,31 +9,12 @@ const method = (value) => {
   throw new Error("URL validation err");
 };
 
-// const validationUserID = celebrate({
-//   params: Joi.object().keys({
-//     userId: Joi.string().alphanum().hex().length(24),
-//   }),
-// });
-
 const validationUpdateUser = celebrate({
   body: Joi.object().keys({
     name: Joi.string().required().min(2).max(30),
     about: Joi.string().required().min(2).max(30),
   }),
 });
-
-// const validationCreateCard = celebrate({
-//   body: Joi.object().keys({
-//     name: Joi.string().required().min(2).max(30),
-//     link: Joi.string().required().custom(method),
-//   }),
-// });
-//
-// const validationCardID = celebrate({
-//   params: Joi.object().keys({
-//     cardId: Joi.string().alphanum().hex().length(24),
-//   }),
-// });
 
 const validationSignUp = celebrate({
   body: Joi.object().keys({
@@ -50,11 +31,25 @@ const validationSignIn = celebrate({
   }),
 });
 
+const validationCreateMovie = celebrate({
+  body: Joi.object().keys({
+    country: Joi.string().required(),
+    director: Joi.string().required(),
+    duration: Joi.number().required(),
+    year: Joi.string().required(),
+    description: Joi.string().required(),
+    image: Joi.string().required().custom(method),
+    trailer: Joi.string().required().custom(method),
+    nameRU: Joi.string().required(),
+    nameEN: Joi.string().required(),
+    thumbnail: Joi.string().required().custom(method),
+    movieId: Joi.string().required(),
+  })
+});
+
 module.exports = {
   validationSignIn,
   validationSignUp,
-  validationUserID,
-  validationCardID,
-  validationCreateCard,
   validationUpdateUser,
+  validationCreateMovie,
 };
