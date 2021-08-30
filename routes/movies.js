@@ -14,6 +14,6 @@ movies.get("/", getMovies);
 
 movies.post("/", validationCreateMovie, createMovie);
 
-movies.delete("/:movieID", deleteMovie);
+movies.delete("/:movieId", deleteMovie);
 
 module.exports = movies;
