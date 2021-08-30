@@ -31,7 +31,6 @@ const movieSchema = new mongoose.Schema({
   image: {
     type: String,
     required: true,
-    unique: true,
     validate: {
       validator: (v) => validator.isURL(v),
       message: "Ссылка на картику-постер должена быть корректной",
@@ -41,7 +40,6 @@ const movieSchema = new mongoose.Schema({
   trailer: {
     type: String,
     required: true,
-    unique: true,
     validate: {
       validator: (v) => validator.isURL(v),
       message: "Ссылка на трейлер должена быть корректной",
@@ -51,7 +49,6 @@ const movieSchema = new mongoose.Schema({
   thumbnail: {
     type: String,
     required: true,
-    unique: true,
     validate: {
       validator: (v) => validator.isURL(v),
       message: "Ссылка на минатюру-постер должена быть корректной",
