@@ -10,10 +10,10 @@ const {
   validationCreateMovie,
 } = require("../utils/validations");
 
-movies.get("/movies", getMovies);
+movies.get("/", getMovies);
 
-movies.post("/movies", validationCreateMovie, createMovie);
+movies.post("/", validationCreateMovie, createMovie);
 
-movies.delete("/movies/:movieID", deleteMovie);
+movies.delete("/:movieID", deleteMovie);
 
 module.exports = movies;
