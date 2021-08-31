@@ -20,7 +20,6 @@ const {
   PASS_NOT_CORRECT,
 } = require("../utils/constants");
 
-
 const { JWT_SECRET_KEY = "SUPER_SECRET_KEY" } = process.env;
 
 module.exports.getProfile = (req, res, next) => {
