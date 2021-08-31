@@ -1,13 +1,8 @@
 const users = require("express").Router();
 
-const {
-  getProfile,
-  updateUser,
-} = require("../controllers/users");
+const { getProfile, updateUser } = require("../controllers/users");
 
-const {
-  validationUpdateUser,
-} = require("../utils/validations");
+const { validationUpdateUser } = require("../utils/validations");
 
 users.get("/me", getProfile);
 

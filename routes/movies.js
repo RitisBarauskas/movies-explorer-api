@@ -8,12 +8,13 @@ const {
 
 const {
   validationCreateMovie,
+  validationDeleteMovie,
 } = require("../utils/validations");
 
 movies.get("/", getMovies);
 
 movies.post("/", validationCreateMovie, createMovie);
 
-movies.delete("/:movieId", deleteMovie);
+movies.delete("/:movieId", validationDeleteMovie, deleteMovie);
 
 module.exports = movies;

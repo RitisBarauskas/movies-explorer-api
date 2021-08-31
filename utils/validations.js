@@ -12,7 +12,7 @@ const method = (value) => {
 const validationUpdateUser = celebrate({
   body: Joi.object().keys({
     name: Joi.string().required().min(2).max(30),
-    about: Joi.string().required().min(2).max(30),
+    email: Joi.string().required().email(),
   }),
 });
 
@@ -44,7 +44,13 @@ const validationCreateMovie = celebrate({
     nameEN: Joi.string().required(),
     thumbnail: Joi.string().required().custom(method),
     movieId: Joi.string().required(),
-  })
+  }),
+});
+
+const validationDeleteMovie = celebrate({
+  body: Joi.object().keys({
+    movieId: Joi.string().required(),
+  }),
 });
 
 module.exports = {
@@ -52,4 +58,5 @@ module.exports = {
   validationSignUp,
   validationUpdateUser,
   validationCreateMovie,
+  validationDeleteMovie,
 };

@@ -11,26 +11,26 @@ const {
 
 const { JWT_SECRET_KEY = "SUPER_SECRET_KEY" } = process.env;
 
-
 module.exports.getProfile = (req, res, next) => {
   const owner = req.user._id;
   User.findById(owner)
     .orFail(() => {
       throw new NotFoundError("Пользователь не найден");
     })
-    .then((user) => res.send({
-      email: user.email,
-      name: user.name,
-    }))
+    .then((user) =>
+      res.send({
+        email: user.email,
+        name: user.name,
+      })
+    )
     .catch((err) => {
       if (err.name === "ValidationError" || err.name === "CastError") {
         throw new BadRequestError("Переданы некорректные данные");
       }
-      throw new NotFoundError(err.message);
+      throw new NotFoundError("Страница профиля не найдена");
     })
     .catch(next);
 };
-
 
 module.exports.updateUser = (req, res, next) => {
   const { email, name } = req.body;
@@ -43,20 +43,20 @@ module.exports.updateUser = (req, res, next) => {
     .orFail(() => {
       throw new NotFoundError("Пользователь с таким ID не найден");
     })
-    .then((user) => res.send({
-      email: user.email,
-      name: user.name,
-    }))
+    .then((user) =>
+      res.send({
+        email: user.email,
+        name: user.name,
+      })
+    )
     .catch((err) => {
       if (err.name === "ValidationError" || err.name === "CastError") {
         throw new BadRequestError("Переданы некорректные данные");
       }
-      throw new NotFoundError(err.message);
+      throw new NotFoundError("Страница пользователя не найдена");
     })
     .catch(next);
 };
-
-
 
 module.exports.createUser = (req, res, next) => {
   const { email, password, name } = req.body;

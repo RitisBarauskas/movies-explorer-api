@@ -20,7 +20,8 @@ module.exports.createMovie = (req, res, next) => {
     nameRU,
     nameEN,
     thumbnail,
-    movieId } = req.body;
+    movieId,
+  } = req.body;
   const owner = req.user._id;
   Movie.create({
     country,
@@ -49,14 +50,15 @@ module.exports.createMovie = (req, res, next) => {
     .catch(next);
 };
 
-
 module.exports.deleteMovie = (req, res, next) => {
   const { movieId } = req.params;
   const userId = req.user._id;
   Movie.findById(movieId)
     .then((movie) => {
       if (!movie) {
-        throw new NotFoundError("Отсутствует фильм, отвечающих критериям поиска");
+        throw new NotFoundError(
+          "Отсутствует фильм, отвечающих критериям поиска"
+        );
       }
       if (userId !== String(movie.owner._id)) {
         throw new ForbiddenError("Нельзя удалять чужие фильмы");
@@ -70,7 +72,7 @@ module.exports.deleteMovie = (req, res, next) => {
           if (err.name === "ValidationError" || err.name === "CastError") {
             throw new BadRequestError("Переданы некорректные данные");
           }
-          throw new NotFoundError(err.message);
+          throw new NotFoundError("Страница с фильмом не найдена");
         })
         .catch(next);
     })
