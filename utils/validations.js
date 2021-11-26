@@ -47,12 +47,6 @@ const validationCreateMovie = celebrate({
   }),
 });
 
-const validationDeleteMovie = celebrate({
-  body: Joi.object().keys({
-    movieId: Joi.string().required(),
-  }),
-});
-
 module.exports = {
   validationSignIn,
   validationSignUp,
